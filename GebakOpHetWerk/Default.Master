@@ -1,0 +1,33 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Default.master.cs" Inherits="GebakOpHetWerk.Default" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="header">
+            <div id="logo">
+
+            </div>
+            <div id="menu">
+                <GOHW:Menu runat="server" />
+            </div>
+            <%-- end nav --%>
+        </div>
+        <%-- end header --%>
+        <div id="content">
+            <asp:ContentPlaceHolder ID="Content" runat="server" />
+        </div>
+        <%-- end content --%>
+        <div id="footer">
+            <div id="copyrights">
+            </div>
+        </div>
+    </form>
+</body>
+</html>
