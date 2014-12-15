@@ -26,6 +26,12 @@
             <td>Omschrijving:</td>
             <td><asp:TextBox ID="tbDescription" runat="server" Rows="5" TextMode="MultiLine" /></td>
         </tr>
+        <tr>
+            <td></td>
+            <td>
+                <asp:Button ID="btnSave" runat="server" Text="Opslaan" />
+            </td>
+        </tr>
     </table>
 </asp:Content>
 
