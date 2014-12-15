@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" Runat="Server">
     <p>
-        Alle Bestellingen:</p>
+        Alle Bestellingen:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; de print knoppen werken nog niet en stored procedure voor de facturen moet nog gemaakt worden</p>
     <p>
         <asp:GridView ID="GridView1" runat="server">
         </asp:GridView>
