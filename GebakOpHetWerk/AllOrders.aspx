@@ -10,9 +10,9 @@
         </asp:GridView>
     </p>
     <p>
-        <asp:Button ID="btnPrint" runat="server" Text="print dit uit" />
+        <asp:Button ID="btnPrint" runat="server" Text="print dit uit" OnClick="btnPrint_Click" />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Button ID="btnFactuur" runat="server" Text="print de facturen" />
+        <asp:Button ID="btnFactuur" runat="server" Text="print de facturen" OnClick="btnFactuur_Click" />
     </p>
 </asp:Content>
 
