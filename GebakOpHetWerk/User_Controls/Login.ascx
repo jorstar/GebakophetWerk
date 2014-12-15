@@ -5,6 +5,11 @@
             <td>Login:</td>
         </tr>
         <tr>
+            <td colspan="2">
+                <asp:Label ID="lblError" runat="server" ForeColor="Red" Text=""></asp:Label>
+            </td>
+        </tr>
+        <tr>
             <td>Gerbuikersnaam:
             </td>
             <td>
@@ -21,7 +26,7 @@
         <tr>
             <td>&nbsp;</td>
             <td>
-                <asp:Button ID="btnLogin" runat="server" Text="Login" />
+                <asp:Button ID="btnLogin" runat="server" Text="Login" OnClick="btnLogin_Click" />
             </td>
         </tr>
         <tr>
