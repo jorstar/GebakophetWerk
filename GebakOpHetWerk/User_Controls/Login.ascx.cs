@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -43,9 +44,13 @@ public partial class User_Controls_Login : System.Web.UI.UserControl
                tbPassword.Focus();
            }
        }
-       catch
+       catch (EntityException ex)
        {
-
+           lblError.Text = ex.Message;
+       }
+       catch (Exception ex)
+       {
+           lblError.Text = ex.Message;
        }
    }
    private static string CalculateHashedPassword(string clearpwd, string loginnaam)

@@ -30,8 +30,7 @@
             </td>
         </tr>
         <tr>
-            <td>&nbsp;</td>
-            <td>Geen account?
+            <td colspan="2">Geen account?
                 <asp:HyperLink ID="HLRegister" NavigateUrl="../Register.aspx" runat="server">Registreren.</asp:HyperLink>
             </td>
         </tr>
