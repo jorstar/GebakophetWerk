@@ -8,14 +8,14 @@
             <td>Taart Toevoegen:</td>
         </tr>
         <tr>
-            <td>Taart naam:<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="tbPiename" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="1">*</asp:RequiredFieldValidator>
+            <td>Taart naam:<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="tbPiename" ErrorMessage="Taartnaam moet ingevult worden." ForeColor="Red" ValidationGroup="1">*</asp:RequiredFieldValidator>
             </td>
             <td>
                 <asp:TextBox ID="tbPiename" runat="server" /></td>
         </tr>
         <tr>
-            <td>Taart Prijs:<asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="tbPrice" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="1">*</asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="tbPrice" ErrorMessage="RegularExpressionValidator" ForeColor="Red" ValidationGroup="1">*</asp:RegularExpressionValidator>
+            <td>Taart Prijs:<asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="tbPrice" ErrorMessage="Prijs moet ingevult worden." ForeColor="Red" ValidationGroup="1">*</asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="tbPrice" ErrorMessage="De prijs moet een nummer zijn." ForeColor="Red" ValidationGroup="1">*</asp:RegularExpressionValidator>
             </td>
             <td><asp:TextBox ID="tbPrice" runat="server" /></td>
         </tr>
@@ -26,7 +26,7 @@
             </td>
         </tr>
         <tr>
-            <td>Omschrijving:<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="tbDescription" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="1">*</asp:RequiredFieldValidator>
+            <td>Omschrijving:<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="tbDescription" ErrorMessage="Vul een omschrijving in." ForeColor="Red" ValidationGroup="1">*</asp:RequiredFieldValidator>
             </td>
             <td><asp:TextBox ID="tbDescription" runat="server" Rows="5" TextMode="MultiLine" /></td>
         </tr>
