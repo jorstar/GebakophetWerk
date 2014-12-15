@@ -10,6 +10,9 @@
 using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Objects;
+using System.Data.Objects.DataClasses;
+using System.Linq;
 
 public partial class GebakophetWerkEntities : DbContext
 {
@@ -27,4 +30,19 @@ public partial class GebakophetWerkEntities : DbContext
     public DbSet<OrderPie> OrderPies { get; set; }
     public DbSet<Pie> Pies { get; set; }
     public DbSet<User> Users { get; set; }
+
+    public virtual ObjectResult<AlleBestellingen_Result> AlleBestellingen()
+    {
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AlleBestellingen_Result>("AlleBestellingen");
+    }
+
+    public virtual ObjectResult<AlleKlanten_Result> AlleKlanten()
+    {
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AlleKlanten_Result>("AlleKlanten");
+    }
+
+    public virtual ObjectResult<Tebakkentaarten_Result> Tebakkentaarten()
+    {
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tebakkentaarten_Result>("Tebakkentaarten");
+    }
 }

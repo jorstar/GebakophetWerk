@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" Runat="Server">
     Alle klanten:
     <br />
-    <asp:GridView ID="GridViewKlanten" runat="server">
+    <asp:GridView ID="GridView1" runat="server">
     </asp:GridView>
 </asp:Content>
 

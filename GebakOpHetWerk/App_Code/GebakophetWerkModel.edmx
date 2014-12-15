@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="GebakophetWerkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GebakophetWerkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="ID" />
@@ -86,6 +86,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="AlleBestellingen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="AlleKlanten" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Tebakkentaarten" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="GebakophetWerkModelStoreContainer">
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderPie" EntityType="Self.OrderPie" Schema="dbo" store:Type="Tables" />
@@ -104,8 +107,7 @@
             <End Role="OrderPie" EntitySet="OrderPie" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GebakophetWerkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -213,7 +215,32 @@
             <End Role="Pie" EntitySet="Pies" />
             <End Role="OrderPie" EntitySet="OrderPies" />
           </AssociationSet>
+          <FunctionImport Name="AlleBestellingen" ReturnType="Collection(GebakophetWerkModel.AlleBestellingen_Result)" />
+          <FunctionImport Name="AlleKlanten" ReturnType="Collection(GebakophetWerkModel.AlleKlanten_Result)" />
+          <FunctionImport Name="Tebakkentaarten" ReturnType="Collection(GebakophetWerkModel.Tebakkentaarten_Result)" />
         </EntityContainer>
+        <ComplexType Name="AlleBestellingen_Result">
+          <Property Type="String" Name="Klantnaam" Nullable="true" MaxLength="352" />
+          <Property Type="String" Name="Taartnaam" Nullable="false" MaxLength="250" />
+          <Property Type="Decimal" Name="prijs" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="aantal" Nullable="false" />
+          <Property Type="DateTime" Name="besteldatum" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="AlleKlanten_Result">
+          <Property Type="String" Name="Klantnaam" Nullable="true" MaxLength="352" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="Adress" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="Stad" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="postcode" Nullable="false" MaxLength="7" />
+          <Property Type="String" Name="gebruikersnaam" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Column1" Nullable="false" MaxLength="12" />
+          <Property Type="Boolean" Name="Rechten" Nullable="false" />
+          <Property Type="Boolean" Name="Actief" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Tebakkentaarten_Result">
+          <Property Type="String" Name="taartnaam" Nullable="false" MaxLength="250" />
+          <Property Type="Int32" Name="Nummer" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -268,6 +295,40 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AlleBestellingen" FunctionName="GebakophetWerkModel.Store.AlleBestellingen">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GebakophetWerkModel.AlleBestellingen_Result">
+                <ScalarProperty Name="Klantnaam" ColumnName="Klantnaam" />
+                <ScalarProperty Name="Taartnaam" ColumnName="Taartnaam" />
+                <ScalarProperty Name="prijs" ColumnName="prijs" />
+                <ScalarProperty Name="aantal" ColumnName="aantal" />
+                <ScalarProperty Name="besteldatum" ColumnName="besteldatum" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AlleKlanten" FunctionName="GebakophetWerkModel.Store.AlleKlanten">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GebakophetWerkModel.AlleKlanten_Result">
+                <ScalarProperty Name="Klantnaam" ColumnName="Klantnaam" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Stad" ColumnName="Stad" />
+                <ScalarProperty Name="postcode" ColumnName="postcode" />
+                <ScalarProperty Name="gebruikersnaam" ColumnName="gebruikersnaam" />
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+                <ScalarProperty Name="Rechten" ColumnName="Rechten" />
+                <ScalarProperty Name="Actief" ColumnName="Actief" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Tebakkentaarten" FunctionName="GebakophetWerkModel.Store.Tebakkentaarten">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GebakophetWerkModel.Tebakkentaarten_Result">
+                <ScalarProperty Name="taartnaam" ColumnName="taartnaam" />
+                <ScalarProperty Name="Nummer" ColumnName="Nummer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

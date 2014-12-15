@@ -11,11 +11,12 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        GebakophetWerkEntities gb = new GebakophetWerkEntities();
+        GridView1.DataSource = gb.AlleBestellingen();
     }
     protected void btnPrint_Click(object sender, EventArgs e)
     {
-        ClientScript.RegisterStartupScript(this.GetType(), "PrintOperation", "printing()", true);
+        
     }
 
 

@@ -74,3 +74,31 @@ public partial class User
 
     public virtual ICollection<Order> Orders { get; set; }
 }
+
+public partial class AlleBestellingen_Result
+{
+    public string Klantnaam { get; set; }
+    public string Taartnaam { get; set; }
+    public decimal prijs { get; set; }
+    public int aantal { get; set; }
+    public System.DateTime besteldatum { get; set; }
+}
+
+public partial class AlleKlanten_Result
+{
+    public string Klantnaam { get; set; }
+    public string Email { get; set; }
+    public string Adress { get; set; }
+    public string Stad { get; set; }
+    public string postcode { get; set; }
+    public string gebruikersnaam { get; set; }
+    public string Column1 { get; set; }
+    public bool Rechten { get; set; }
+    public bool Actief { get; set; }
+}
+
+public partial class Tebakkentaarten_Result
+{
+    public string taartnaam { get; set; }
+    public Nullable<int> Nummer { get; set; }
+}
