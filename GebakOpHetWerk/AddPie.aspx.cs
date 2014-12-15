@@ -24,17 +24,17 @@ public partial class _Default : System.Web.UI.Page
                     {
                         string filename = Path.GetFileName(fuPicture.FileName);
                         fuPicture.SaveAs(Server.MapPath("~/") + filename);
-                        StatusLabel.Text = "Upload status: File uploaded!";
+                        ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Upload status: File uploaded!"+"');", true);
                     }
                     else
-                        StatusLabel.Text = "Upload status: The file has to be less than 100 kb!";
+                        ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" +"Upload status: The file has to be less than 100 kb!" +"');", true);                       StatusLabel.Text = ;
                 }
                 else
-                    StatusLabel.Text = "Upload status: Only JPEG files are accepted!";
+                    ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Upload status: Only JPEG files are accepted!" + "');", true);                    StatusLabel.Text = ;
             }
             catch (Exception ex)
             {
-                StatusLabel.Text = "Upload status: The file could not be uploaded. The following error occured: " + ex.Message;
+                ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Upload status: The file could not be uploaded. The following error occured: " + ex.Message + "');", true);
             }
         }
 
