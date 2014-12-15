@@ -8,12 +8,15 @@
             <td>Taart Toevoegen:</td>
         </tr>
         <tr>
-            <td>Taart naam:</td>
+            <td>Taart naam:<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="tbPiename" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="1">*</asp:RequiredFieldValidator>
+            </td>
             <td>
                 <asp:TextBox ID="tbPiename" runat="server" /></td>
         </tr>
         <tr>
-            <td>Taart Prijs:</td>
+            <td>Taart Prijs:<asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="tbPrice" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="1">*</asp:RequiredFieldValidator>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="tbPrice" ErrorMessage="RegularExpressionValidator" ForeColor="Red" ValidationGroup="1">*</asp:RegularExpressionValidator>
+            </td>
             <td><asp:TextBox ID="tbPrice" runat="server" /></td>
         </tr>
         <tr>
@@ -23,11 +26,14 @@
             </td>
         </tr>
         <tr>
-            <td>Omschrijving:</td>
+            <td>Omschrijving:<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="tbDescription" ErrorMessage="RequiredFieldValidator" ForeColor="Red" ValidationGroup="1">*</asp:RequiredFieldValidator>
+            </td>
             <td><asp:TextBox ID="tbDescription" runat="server" Rows="5" TextMode="MultiLine" /></td>
         </tr>
         <tr>
-            <td></td>
+            <td>
+                <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="1" />
+            </td>
             <td>
                 <asp:Button ID="btnSave" runat="server" Text="Opslaan" OnClick="btnSave_Click" />
             </td>
