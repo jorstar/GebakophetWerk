@@ -11,4 +11,19 @@ public partial class _Default : System.Web.UI.Page
     {
 
     }
+    GebakophetWerkEntities ef = new GebakophetWerkEntities();
+    protected void btnRegister_Click(object sender, EventArgs e)
+    {
+        if (Page.IsValid)
+        {
+            try
+            {
+                User objUser = new User();
+            }
+            catch
+            {
+
+            }
+        }
+    }
 }
