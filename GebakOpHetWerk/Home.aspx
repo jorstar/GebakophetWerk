@@ -6,12 +6,12 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server"><ContentTemplate>
     <table style="width: 100%;">
         <tr>
-            <td>Voornaam:</td>
+            <td>Voornaam:<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Voornaam is verplicht." Text="*" ControlToValidate="tbvoornaam" /></td>
             <td>
                 <asp:TextBox ID="tbvoornaam" ReadOnly="true" runat="server"></asp:TextBox></td>
         </tr>
         <tr>
-            <td>Achternaam:</td>
+            <td>Achternaam:<asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Voornaam is verplicht." Text="*" ControlToValidate="tbachternaam" /></td>
             <td><asp:TextBox ID="tbachternaam" ReadOnly="true" runat="server"></asp:TextBox></td>
         </tr>
         <tr>
@@ -19,19 +19,19 @@
             <td><asp:TextBox ID="tbtussen" ReadOnly="true" runat="server"></asp:TextBox></td>
         </tr>
         <tr>
-            <td>Email</td>
-            <td><asp:TextBox ID="tbemail" ReadOnly="true" runat="server"></asp:TextBox></td>
+            <td>Email:<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Voornaam is verplicht." Text="*" ControlToValidate="tbemail" /></td>
+            <td><asp:TextBox ID="tbemail" ReadOnly="true" runat="server" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" TextMode="Email"></asp:TextBox></td>
         </tr>
         <tr>
-            <td>Adres:</td>
+            <td>Adres:<asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="Voornaam is verplicht." Text="*" ControlToValidate="tbadres" /></td>
             <td><asp:TextBox ID="tbadres" ReadOnly="true" runat="server"></asp:TextBox></td>
         </tr>
         <tr>
-            <td>plaats:</td>
+            <td>plaats:<asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="Voornaam is verplicht." Text="*" ControlToValidate="tbplaats" /></td>
             <td><asp:TextBox ID="tbplaats" ReadOnly="true" runat="server"></asp:TextBox></td>
         </tr>
         <tr>
-            <td>Postcode:</td>
+            <td>Postcode:<asp:RequiredFieldValidator ID="RequiredFieldValidator6" pattern="^[1-9][0-9]{3}\s?[a-zA-Z]{2}$" runat="server" ErrorMessage="Voornaam is verplicht." Text="*" ControlToValidate="tbpostcode" /></td>
             <td><asp:TextBox ID="tbpostcode" ReadOnly="true" runat="server"></asp:TextBox></td>
         </tr>
         <tr>

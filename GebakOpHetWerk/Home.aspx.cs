@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -62,6 +63,59 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void btnSave_Click(object sender, EventArgs e)
     {
+        try
+        {
+            if (Page.IsValid)
+            {
+                int uid = (int)Session["User"];
+                var curuser = (from u in ef.Users
+                               where u.ID == uid
+                               select u);
 
+                User user = (User)curuser;
+                user.Firstname = tbvoornaam.Text;
+                user.Lastname = tbachternaam.Text;
+                user.Middlename = tbtussen.Text;
+                user.Adress = tbadres.Text;
+                user.City = tbplaats.Text;
+                user.Zipcode = tbpostcode.Text;
+                user.Email = tbemail.Text;
+                user.Password = CalculateHashedPassword(tbwachtwoord.Text, user.Username);
+
+                ef.SaveChanges();
+
+                Session["verandering"] = "Account is aangepast.";
+                Response.Redirect("Gelukt.aspx");
+            }
+        }
+        catch (DuplicateNameException ex)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+        }
+        catch (ArgumentNullException ex)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+        }
+        catch (FormatException ex)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+        }
+        catch (EntityException ex)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+        }
+        catch (Exception ex)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+        }
+    }
+    private static string CalculateHashedPassword(string clearpwd, string loginnaam)
+    {
+        using (var sha = System.Security.Cryptography.SHA256.Create())
+        {
+            var computedHash = sha.ComputeHash(System.Text.Encoding.Unicode.GetBytes(clearpwd + loginnaam.ToUpper()));
+
+            return Convert.ToBase64String(computedHash);
+        }
     }
 }

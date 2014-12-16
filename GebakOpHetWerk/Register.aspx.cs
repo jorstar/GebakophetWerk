@@ -22,10 +22,7 @@ public partial class _Default : System.Web.UI.Page
                 User objUser = new User();
                 objUser.Firstname = tbFirstname.Text;
                 objUser.Lastname = tbLastname.Text;
-                if (tbMiddelname.Text != "")
-                {
-                    objUser.Middlename = tbMiddelname.Text;
-                }
+                objUser.Middlename = tbMiddelname.Text;
                 objUser.Adress = tbAdress.Text;
                 objUser.Zipcode = tbZipcode.Value;
                 objUser.City = tbCity.Text;
@@ -36,6 +33,9 @@ public partial class _Default : System.Web.UI.Page
                 objUser.Activated = true;
                 ef.Users.Add(objUser);
                 ef.SaveChanges();
+
+                Session["verandering"] = "Registratie is voltooid.";
+                Response.Redirect("Gelukt.aspx");
             }
             catch (DuplicateNameException ex)
             {
