@@ -20,7 +20,7 @@ public partial class Order
     public int ID { get; set; }
     public int UserID { get; set; }
     public System.DateTime OrderDate { get; set; }
-    public Nullable<decimal> Totaalprijs { get; set; }
+    public decimal Totaalprijs { get; set; }
 
     public virtual User User { get; set; }
     public virtual ICollection<OrderPie> OrderPies { get; set; }
@@ -31,6 +31,7 @@ public partial class OrderPie
     public int OrderID { get; set; }
     public int PieID { get; set; }
     public int Number { get; set; }
+    public decimal AmountPrice { get; set; }
 
     public virtual Order Order { get; set; }
     public virtual Pie Pie { get; set; }

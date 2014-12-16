@@ -12,7 +12,7 @@
                         <td><h3><asp:Label ID="lblPie" runat="server" Text='<%# Eval("Name") %>' /></h3></td>
                     </tr>
                     <tr>
-                        <td><asp:Image ID="imgPie" ImageUrl='<%# Eval("Picture") %>' runat="server" /></td>
+                        <td><asp:Image ID="imgPie" ImageUrl='<%# Eval("Picture") %>' Width="150" Height="150" runat="server" /></td>
                         <td><asp:Label ID="lbldescPie" runat="server" Text='<%# Eval("Description") %>' /></td>
                         <td><asp:Label ID="Label1" runat="server" Text='<%# Eval("Price") %>' /></td>
                     </tr>
@@ -31,7 +31,7 @@
                         <td><h3><asp:Label ID="lblPie" runat="server" Text='<%# Eval("Name") %>' /></h3></td>
                     </tr>
                     <tr>
-                        <td><asp:Image ID="imgPie" ImageUrl='<%# Eval("Picture") %>' runat="server" /></td>
+                        <td><asp:Image ID="imgPie" ImageUrl='<%# Eval("Picture") %>' Width="150" Height="150" runat="server" /></td>
                         <td><asp:Label ID="lbldescPie" runat="server" Text='<%# Eval("Description") %>' /></td>
                         <td><asp:Label ID="Label1" runat="server" Text='<%# Eval("Price") %>' /></td>
                     </tr>
