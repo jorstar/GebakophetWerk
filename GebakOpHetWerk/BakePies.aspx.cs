@@ -11,7 +11,21 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        GebakophetWerkEntities gb = new GebakophetWerkEntities();
-        GridView1.DataSource = gb.Tebakkentaarten();
+        GebakophetWerkEntities ef = new GebakophetWerkEntities();
+
+        TimeSpan mintime = new TimeSpan(14, 0, 0);
+        DateTime mindate = DateTime.Now.AddDays(-2);
+        DateTime mindatetime = new DateTime(mindate.Year, mindate.Month, mindate.Day, mintime.Hours, mintime.Minutes, mintime.Seconds);
+
+        TimeSpan maxtime = new TimeSpan(14, 0, 0);
+        DateTime maxdate = DateTime.Now.AddDays(-2);
+        DateTime maxdatetime = new DateTime(maxdate.Year, maxdate.Month, maxdate.Day, maxtime.Hours, maxtime.Minutes, maxtime.Seconds);
+
+        var taarten = (from o in ef.OrderPies
+                       where o.Order.OrderDate < maxdatetime && o.Order.OrderDate >= mindatetime
+                       group o by new { o.Pie.Name , o.Number } into op
+                       select new { op.Key.Name, op.Key.Number }).ToList();
+        GridView1.DataSource = taarten;
+        GridView1.DataBind();
     }
 }

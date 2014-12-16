@@ -20,7 +20,7 @@
     <asp:Button ID="btnToevoegen" runat="server" Text="toevoegen" OnClick="btnToevoegen_Click" />
     <br />
     <br />
-            <asp:GridView ID="GridViewBestelling" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None">
+            <asp:GridView ID="dgvBestelling" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None">
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <EditRowStyle BackColor="#999999" />
                 <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />

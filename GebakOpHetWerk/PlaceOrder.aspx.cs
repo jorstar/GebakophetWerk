@@ -30,26 +30,68 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void btnToevoegen_Click(object sender, EventArgs e)
     {
-        
-        
-        var orderid = (from o in ef.Orders
-                       orderby o.ID descending
-                       select o.ID).First();
+        //try
+        //{
 
-        int nextOrderid = (int)orderid + 1;
-        int pieID = Convert.ToInt32(ddlTaarten.SelectedValue);
-        decimal aantal = Convert.ToDecimal(tbAantal.Text);
+        //    int uid  = (int)Session["user"];
 
-        var taartprijs = (from p in ef.Pies
-                              where p.ID == pieID
-                              select p.Price).First();
+        //    if (Session["curorder"] == null)
+        //    {
+        //        Order neworder = new Order();
+        //        neworder.UserID = uid;
+        //        neworder.OrderDate = DateTime.Now;
+
+        //        ef.Orders.Add(neworder);
+        //        ef.SaveChanges();
+
+        //        var orderid = (from o in ef.Orders
+        //                       where o.UserID == uid && o.OrderDate == null
+        //                       select o.ID).First();
+        //        Session["curorder"] = (int)orderid;
+        //    }
+
+            
+
+            
+
+            
+                
+            
+
+            
+
+
+        //    int pieID = Convert.ToInt32(ddlTaarten.SelectedValue);
+        //    int aantal = Convert.ToInt32(tbAantal.Text);
+
+        //    var taartprijs = (from p in ef.Pies
+        //                      where p.ID == pieID
+        //                      select p.Price).First();
+
+        //    decimal prijs = (decimal)taartprijs * aantal;
+
+        //    List<OrderPie> taartlijst = new List<OrderPie>();
+        //    OrderPie objOP = new OrderPie();
+                
 
 
 
-        Order bestelling = new Order();
-        List<OrderPie> taartlijst = new List<OrderPie>();
+                
+        //    objOP.OrderID = (int)orderid;
+            
+        //    objOP.PieID = pieID;
+        //    objOP.Number = aantal;
+        //    objOP.AmountPrice = prijs;
 
-        
-        taartlijst.Add(nextOrderid,pieID,aantal,);
+
+        //    taartlijst.Add(objOP);
+
+        //    dgvBestelling.DataSource = taartlijst;
+        //    dgvBestelling.DataBind();
+        //}
+        //catch (Exception ex)
+        //{
+
+        //}
     }
 }

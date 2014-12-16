@@ -34,6 +34,8 @@ public partial class _Default : System.Web.UI.Page
                 objUser.Password = CalculateHashedPassword(tbPassword.Text, tbUsername.Text);
                 objUser.Rights = false;
                 objUser.Activated = true;
+                ef.Users.Add(objUser);
+                ef.SaveChanges();
             }
             catch (DuplicateNameException ex)
             {
