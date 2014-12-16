@@ -11,7 +11,7 @@ public partial class _Default : System.Web.UI.Page
     GebakophetWerkEntities ef = new GebakophetWerkEntities();
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+
         int uid = (int)Session["User"];
         var gebruikers = (from g in ef.Users
                           where g.ID != uid
