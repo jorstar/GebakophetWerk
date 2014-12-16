@@ -13,9 +13,11 @@ public partial class _Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
+        GebakophetWerkEntities ef = new GebakophetWerkEntities();
+
         if (Session["currentOrderID"] == null)
         {
-            int usrString = Convert.ToInt32(Session["uID"]);
+            int usrString = Convert.ToInt32(Session["User"]);
             var user = from u in ef.Users
                        where u.ID == usrString
                        select u;
@@ -23,15 +25,15 @@ public partial class _Default : System.Web.UI.Page
 
             ef.Orders.Add(new Order
             {
-                ID = Convert.ToInt32(Session["uID"]),
+                ID = Convert.ToInt32(Session["User"]),
                 OrderDate = DateTime.Today,
                 User = objGebruiker
             });
             ef.SaveChanges();
 
-            if (ef.GetOrderIdList((int)Session["uID"]) != null)
+            if (ef.GetOrderIdList((int)Session["User"]) != null)
             {
-                Session["currentOrderID"] = ef.GetOrderIdList((int)Session["uID"]).First();
+                Session["currentOrderID"] = ef.GetOrderIdList((int)Session["User"]).First();
             }
             else
             {
@@ -46,8 +48,8 @@ public partial class _Default : System.Web.UI.Page
         if (!IsPostBack)
         {
             ddlTaarten.DataSource = ef.GetTaartenList();
-            ddlTaarten.DataTextField = "name";
-            ddlTaarten.DataValueField = "cakeID";
+            ddlTaarten.DataTextField = "Name";
+            ddlTaarten.DataValueField = "ID";
             ddlTaarten.DataBind();
             ddlTaarten.SelectedIndex = 0;
         }
@@ -80,7 +82,7 @@ public partial class _Default : System.Web.UI.Page
             {
 
 
-                int userID = Convert.ToInt32(Session["uID"]);
+                int userID = Convert.ToInt32(Session["User"]);
 
                 var oID = from O in ef.Orders
                           where O.UserID == userID
