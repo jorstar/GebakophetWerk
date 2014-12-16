@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="GebakophetWerkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GebakophetWerkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="ID" />
@@ -12,6 +12,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="Totaalprijs" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="OrderPie">
           <Key>
@@ -120,6 +121,7 @@
           <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="User" Relationship="Self.FK_Order_User" FromRole="Order" ToRole="User" />
           <NavigationProperty Name="OrderPies" Relationship="Self.FK_OrderPie_Order" FromRole="Order" ToRole="OrderPie" />
+          <Property Name="Totaalprijs" Type="Decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="OrderPie">
           <Key>
@@ -250,6 +252,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="GebakophetWerkModel.Order">
               <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Totaalprijs" ColumnName="Totaalprijs" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />

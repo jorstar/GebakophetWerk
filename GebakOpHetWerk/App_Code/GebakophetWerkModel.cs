@@ -20,6 +20,7 @@ public partial class Order
     public int ID { get; set; }
     public int UserID { get; set; }
     public System.DateTime OrderDate { get; set; }
+    public Nullable<decimal> Totaalprijs { get; set; }
 
     public virtual User User { get; set; }
     public virtual ICollection<OrderPie> OrderPies { get; set; }
