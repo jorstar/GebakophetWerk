@@ -41,11 +41,6 @@ public partial class GebakophetWerkEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<AlleKlanten_Result>("AlleKlanten");
     }
 
-    public virtual ObjectResult<Tebakkentaarten_Result> Tebakkentaarten()
-    {
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tebakkentaarten_Result>("Tebakkentaarten");
-    }
-
     public virtual ObjectResult<Nullable<decimal>> GetCakePrice(Nullable<int> iD)
     {
         var iDParameter = iD.HasValue ?
@@ -67,5 +62,10 @@ public partial class GebakophetWerkEntities : DbContext
     public virtual ObjectResult<GetTaartenList_Result> GetTaartenList()
     {
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTaartenList_Result>("GetTaartenList");
+    }
+
+    public virtual ObjectResult<Tebakkentaarten_Result> Tebakkentaarten()
+    {
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tebakkentaarten_Result>("Tebakkentaarten");
     }
 }

@@ -22,7 +22,7 @@ public partial class _Default : System.Web.UI.Page
 
         var bestellingen = (from o in ef.Orders
                             where o.OrderDate < maxdatetime && o.OrderDate >= mindatetime
-                            select new { o.ID, Name = o.User.Firstname + " " + o.User.Middlename + " " + o.User.Lastname, o.OrderDate, o.Totaalprijs });
+                            select new { o.ID, Name = o.User.Firstname + " " + o.User.Middlename + " " + o.User.Lastname, o.OrderDate});
 
         var bestellingenID = (from o in ef.Orders
                             where o.OrderDate < maxdatetime && o.OrderDate >= mindatetime

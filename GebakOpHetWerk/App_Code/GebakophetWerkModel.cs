@@ -20,7 +20,6 @@ public partial class Order
     public int ID { get; set; }
     public int UserID { get; set; }
     public Nullable<System.DateTime> OrderDate { get; set; }
-    public Nullable<decimal> Totaalprijs { get; set; }
 
     public virtual User User { get; set; }
     public virtual ICollection<OrderPie> OrderPies { get; set; }
@@ -83,7 +82,7 @@ public partial class AlleBestellingen_Result
     public string Taartnaam { get; set; }
     public decimal prijs { get; set; }
     public int aantal { get; set; }
-    public System.DateTime besteldatum { get; set; }
+    public Nullable<System.DateTime> besteldatum { get; set; }
 }
 
 public partial class AlleKlanten_Result
@@ -94,7 +93,6 @@ public partial class AlleKlanten_Result
     public string Stad { get; set; }
     public string postcode { get; set; }
     public string gebruikersnaam { get; set; }
-    public string Column1 { get; set; }
     public bool Rechten { get; set; }
     public bool Actief { get; set; }
 }
