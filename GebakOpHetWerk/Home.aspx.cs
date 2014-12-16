@@ -25,7 +25,7 @@ public partial class _Default : System.Web.UI.Page
 
         tbvoornaam.Text = user.Firstname;
         tbachternaam.Text = user.Lastname;
-        tbtussen.Text = user.Middlename;
+        tbTussenvoegsel.Text = user.Middlename;
         tbadres.Text = user.Adress;
         tbplaats.Text = user.City;
         tbpostcode.Text = user.Zipcode;
@@ -35,7 +35,7 @@ public partial class _Default : System.Web.UI.Page
     {
         tbvoornaam.ReadOnly = false;
         tbachternaam.ReadOnly = false;
-        tbtussen.ReadOnly = false;
+        tbTussenvoegsel.ReadOnly = false;
         tbadres.ReadOnly = false;
         tbplaats.ReadOnly = false;
         tbpostcode.ReadOnly = false;
@@ -49,7 +49,7 @@ public partial class _Default : System.Web.UI.Page
     {
         tbvoornaam.ReadOnly = true;
         tbachternaam.ReadOnly = true;
-        tbtussen.ReadOnly = true;
+        tbTussenvoegsel.ReadOnly = true;
         tbadres.ReadOnly = true;
         tbplaats.ReadOnly = true;
         tbpostcode.ReadOnly = true;
@@ -72,15 +72,18 @@ public partial class _Default : System.Web.UI.Page
                                where u.ID == uid
                                select u);
 
-                User user = (User)curuser;
+                User user = (User)curuser.Single();
                 user.Firstname = tbvoornaam.Text;
                 user.Lastname = tbachternaam.Text;
-                user.Middlename = tbtussen.Text;
+                user.Middlename = tbTussenvoegsel.Text;
                 user.Adress = tbadres.Text;
                 user.City = tbplaats.Text;
                 user.Zipcode = tbpostcode.Text;
                 user.Email = tbemail.Text;
-                user.Password = CalculateHashedPassword(tbwachtwoord.Text, user.Username);
+                if (tbwachtwoord.Text != "")
+                {
+                    user.Password = CalculateHashedPassword(tbwachtwoord.Text, user.Username);
+                }
 
                 ef.SaveChanges();
 

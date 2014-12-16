@@ -17,7 +17,7 @@
         </tr>
         <tr>
             <td>Tussenvoegsels:</td>
-            <td><asp:TextBox ID="tbtussen" ReadOnly="true" runat="server"></asp:TextBox></td>
+            <td><asp:TextBox ID="tbTussenvoegsel" ReadOnly="true" runat="server"></asp:TextBox></td>
         </tr>
         <tr>
             <td>Email:<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Voornaam is verplicht." Text="*" ControlToValidate="tbemail" /></td>
