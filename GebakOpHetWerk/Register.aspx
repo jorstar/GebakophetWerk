@@ -1,11 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.master" AutoEventWireup="true" CodeFile="Register.aspx.cs" Inherits="_Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-    <style type="text/css">
-        .auto-style1 {
-            height: 26px;
-        }
-    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" runat="Server">
     <div id="register">
@@ -14,9 +9,9 @@
                 <td>Registreren:</td>
             </tr>
             <tr>
-                <td class="auto-style1">Voornaam<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="tbFirstname" ErrorMessage="Voornaam is verplicht." ForeColor="Red">*</asp:RequiredFieldValidator>
+                <td >Voornaam<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="tbFirstname" ErrorMessage="Voornaam is verplicht." ForeColor="Red">*</asp:RequiredFieldValidator>
                 </td>
-                <td class="auto-style1">
+                <td >
                     <asp:TextBox ID="tbFirstname" runat="server"></asp:TextBox>
                 </td>
             </tr>
@@ -86,6 +81,7 @@
                 </td>
             </tr>
         </table>
+        <asp:ValidationSummary ID="ValidationSummary1" runat="server" />
     </div>
 </asp:Content>
 

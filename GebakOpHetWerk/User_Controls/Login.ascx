@@ -20,7 +20,7 @@
             <td>Wachtwoord:
             </td>
             <td>
-                <asp:TextBox ID="tbPassword" runat="server" />
+                <asp:TextBox ID="tbPassword" runat="server" TextMode="Password" />
             </td>
         </tr>
         <tr>

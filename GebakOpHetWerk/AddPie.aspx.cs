@@ -29,9 +29,14 @@ public partial class _Default : System.Web.UI.Page
                         if (fuPicture.PostedFile.ContentLength < 102400)
                         {
                             string filename = Path.GetFileName(fuPicture.FileName);
-                            fuPicture.SaveAs(Server.MapPath("~/Images/Cakes") + filename);
-                            taart.Picture = "~/Images/Cakes" + filename;
+                            fuPicture.SaveAs(Server.MapPath("~/Images/Cakes/") + filename);
+                            taart.Picture = "~/Images/Cakes/" + filename;
                             ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Upload status: File uploaded!" + "');", true);
+
+                            tbPiename.Text = "";
+                            tbDescription.Text = "";
+                            tbPrice.Text = "";
+                            
                         }
                         else
                             ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + "Upload status: The file has to be less than 100 kb!" + "');", true);

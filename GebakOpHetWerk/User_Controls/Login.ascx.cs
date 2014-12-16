@@ -28,7 +28,7 @@ public partial class User_Controls_Login : System.Web.UI.UserControl
            {
                User objUser = (User)Gebruiker.First();
                bool role = objUser.Rights;
-               Session["Gebruiker"] = objUser.ID;
+               Session["User"] = objUser.ID;
                Session["Role"] = role;
 
                Response.Redirect("Home.aspx");
