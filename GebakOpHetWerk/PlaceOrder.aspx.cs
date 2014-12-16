@@ -12,86 +12,108 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        
 
-        var taart = (from tar in ef.Pies
-                     where tar.Activated == true
-                     select new {ID = tar.ID, Naam = tar.Name }).ToList();
-        ddlTaarten.DataTextField = "Naam";
-        ddlTaarten.DataValueField = "ID";
-        ddlTaarten.DataSource = taart.ToList();
-        ddlTaarten.DataBind();
+        if (Session["currentOrderID"] == null)
+        {
+            int usrString = Convert.ToInt32(Session["uID"]);
+            var user = from u in ef.Users
+                       where u.ID == usrString
+                       select u;
+            User objGebruiker = (User)user.First();
+
+            ef.Orders.Add(new Order
+            {
+                ID = Convert.ToInt32(Session["uID"]),
+                OrderDate = DateTime.Today,
+                User = objGebruiker
+            });
+            ef.SaveChanges();
+
+            if (ef.GetOrderIdList((int)Session["uID"]) != null)
+            {
+                Session["currentOrderID"] = ef.GetOrderIdList((int)Session["uID"]).First();
+            }
+            else
+            {
+                //redirect naar de homepage
+                Response.Redirect("Home.aspx");
+            }
+
+
+
+        }
+
+        if (!IsPostBack)
+        {
+            ddlTaarten.DataSource = ef.GetTaartenList();
+            ddlTaarten.DataTextField = "name";
+            ddlTaarten.DataValueField = "cakeID";
+            ddlTaarten.DataBind();
+            ddlTaarten.SelectedIndex = 0;
+        }
     }
-    protected void btnBestellen_Click(object sender, EventArgs e)
+
+    public Decimal CalculateTotalAmount()
     {
+        if (ef.GetCakePrice(Convert.ToInt32(ddlTaarten.SelectedValue)) != null && tbAantal.Text != "" && tbAantal.Text != "0")
+        {
 
+            decimal objDecimel = Convert.ToDecimal(ef.GetCakePrice(Convert.ToInt32(ddlTaarten.SelectedValue)).First());
 
+            int objInt = Convert.ToInt32(tbAantal.Text);
 
+            Decimal totalPrice = (objDecimel * objInt);
+
+            return totalPrice;
+
+        }
+        else
+            return 0;
     }
+
     protected void btnToevoegen_Click(object sender, EventArgs e)
     {
-        //try
-        //{
 
-        //    int uid  = (int)Session["user"];
-
-        //    if (Session["curorder"] == null)
-        //    {
-        //        Order neworder = new Order();
-        //        neworder.UserID = uid;
-        //        neworder.OrderDate = DateTime.Now;
-
-        //        ef.Orders.Add(neworder);
-        //        ef.SaveChanges();
-
-        //        var orderid = (from o in ef.Orders
-        //                       where o.UserID == uid && o.OrderDate == null
-        //                       select o.ID).First();
-        //        Session["curorder"] = (int)orderid;
-        //    }
-
-            
-
-            
-
-            
-                
-            
-
-            
+        if (Page.IsValid)
+        {
+            if (Session["currentOrderID"] != null)
+            {
 
 
-        //    int pieID = Convert.ToInt32(ddlTaarten.SelectedValue);
-        //    int aantal = Convert.ToInt32(tbAantal.Text);
+                int userID = Convert.ToInt32(Session["uID"]);
 
-        //    var taartprijs = (from p in ef.Pies
-        //                      where p.ID == pieID
-        //                      select p.Price).First();
+                var oID = from O in ef.Orders
+                          where O.UserID == userID
+                          orderby O.ID descending
+                          select O;
+                Order objOrder = oID.First();
 
-        //    decimal prijs = (decimal)taartprijs * aantal;
+                int taartID = Convert.ToInt32(ddlTaarten.SelectedValue);
+                var idTaart = from T in ef.Pies
+                              where T.ID == taartID
+                              select T;
+                Pie objTaart = idTaart.First();
 
-        //    List<OrderPie> taartlijst = new List<OrderPie>();
-        //    OrderPie objOP = new OrderPie();
-                
+                OrderPie objOrderItem = new OrderPie();
 
+                objOrderItem.PieID = Convert.ToInt32(ddlTaarten.SelectedValue);
+                objOrderItem.OrderID = objOrder.ID;
+                objOrderItem.AmountPrice = CalculateTotalAmount();
+                objOrderItem.Number = Convert.ToInt32(tbAantal.Text);
 
+                ef.OrderPies.Add(objOrderItem);
 
-                
-        //    objOP.OrderID = (int)orderid;
-            
-        //    objOP.PieID = pieID;
-        //    objOP.Number = aantal;
-        //    objOP.AmountPrice = prijs;
+                ef.SaveChanges();
+            }
+        }
+    }
+    protected void ddlTaarten_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        lblTotalAmount.Text = Convert.ToString(CalculateTotalAmount());
 
-
-        //    taartlijst.Add(objOP);
-
-        //    dgvBestelling.DataSource = taartlijst;
-        //    dgvBestelling.DataBind();
-        //}
-        //catch (Exception ex)
-        //{
-
-        //}
+    }
+    protected void tbAantal_TextChanged(object sender, EventArgs e)
+    {
+        lblTotalAmount.Text = Convert.ToString(CalculateTotalAmount());
     }
 }

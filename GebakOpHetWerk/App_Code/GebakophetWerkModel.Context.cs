@@ -45,4 +45,27 @@ public partial class GebakophetWerkEntities : DbContext
     {
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Tebakkentaarten_Result>("Tebakkentaarten");
     }
+
+    public virtual ObjectResult<Nullable<decimal>> GetCakePrice(Nullable<int> iD)
+    {
+        var iDParameter = iD.HasValue ?
+            new ObjectParameter("ID", iD) :
+            new ObjectParameter("ID", typeof(int));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<decimal>>("GetCakePrice", iDParameter);
+    }
+
+    public virtual ObjectResult<Nullable<int>> GetOrderIdList(Nullable<int> userID)
+    {
+        var userIDParameter = userID.HasValue ?
+            new ObjectParameter("UserID", userID) :
+            new ObjectParameter("UserID", typeof(int));
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetOrderIdList", userIDParameter);
+    }
+
+    public virtual ObjectResult<GetTaartenList_Result> GetTaartenList()
+    {
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTaartenList_Result>("GetTaartenList");
+    }
 }

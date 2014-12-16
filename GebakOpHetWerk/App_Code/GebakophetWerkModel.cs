@@ -99,6 +99,12 @@ public partial class AlleKlanten_Result
     public bool Actief { get; set; }
 }
 
+public partial class GetTaartenList_Result
+{
+    public string Name { get; set; }
+    public int ID { get; set; }
+}
+
 public partial class Tebakkentaarten_Result
 {
     public string taartnaam { get; set; }

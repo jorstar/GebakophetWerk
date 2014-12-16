@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="GebakophetWerkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="GebakophetWerkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="ID" />
@@ -12,7 +12,6 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserID" Type="int" Nullable="false" />
           <Property Name="OrderDate" Type="datetime" />
-          <Property Name="Totaalprijs" Type="decimal" Precision="18" Scale="2" />
         </EntityType>
         <EntityType Name="OrderPie">
           <Key>
@@ -90,6 +89,13 @@
         </Association>
         <Function Name="AlleBestellingen" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="AlleKlanten" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetCakePrice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetOrderIdList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetTaartenList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Tebakkentaarten" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="GebakophetWerkModelStoreContainer">
           <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
@@ -222,6 +228,13 @@
           <FunctionImport Name="AlleBestellingen" ReturnType="Collection(GebakophetWerkModel.AlleBestellingen_Result)" />
           <FunctionImport Name="AlleKlanten" ReturnType="Collection(GebakophetWerkModel.AlleKlanten_Result)" />
           <FunctionImport Name="Tebakkentaarten" ReturnType="Collection(GebakophetWerkModel.Tebakkentaarten_Result)" />
+          <FunctionImport Name="GetCakePrice" ReturnType="Collection(Decimal)">
+          <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetOrderIdList" ReturnType="Collection(Int32)">
+          <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetTaartenList" ReturnType="Collection(GebakophetWerkModel.GetTaartenList_Result)" />
         </EntityContainer>
         <ComplexType Name="AlleBestellingen_Result">
           <Property Type="String" Name="Klantnaam" Nullable="true" MaxLength="352" />
@@ -245,6 +258,10 @@
           <Property Type="String" Name="taartnaam" Nullable="false" MaxLength="250" />
           <Property Type="Int32" Name="Nummer" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="GetTaartenList_Result">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="250" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -254,7 +271,6 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="GebakophetWerkModel.Order">
               <MappingFragment StoreEntitySet="Order">
-                <ScalarProperty Name="Totaalprijs" ColumnName="Totaalprijs" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
@@ -332,6 +348,16 @@
               <ComplexTypeMapping TypeName="GebakophetWerkModel.Tebakkentaarten_Result">
                 <ScalarProperty Name="taartnaam" ColumnName="taartnaam" />
                 <ScalarProperty Name="Nummer" ColumnName="Nummer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetCakePrice" FunctionName="GebakophetWerkModel.Store.GetCakePrice" />
+          <FunctionImportMapping FunctionImportName="GetOrderIdList" FunctionName="GebakophetWerkModel.Store.GetOrderIdList" />
+          <FunctionImportMapping FunctionImportName="GetTaartenList" FunctionName="GebakophetWerkModel.Store.GetTaartenList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GebakophetWerkModel.GetTaartenList_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
