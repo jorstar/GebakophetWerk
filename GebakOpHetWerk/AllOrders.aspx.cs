@@ -71,5 +71,16 @@ public partial class _Default : System.Web.UI.Page
 
         GridView2.DataSource = facturen;
         GridView2.DataBind();
+
+
+        //var adres = (from st in ef.Users
+        //             where st.ID == sel
+        //             select st.Adress);
+        //lbladres.Text = Convert.ToString(adres);
+
+        //var stad = (from st in ef.Users
+        //             where st.ID == sel
+        //             select st.City);
+        //lblstad.Text = Convert.ToString(stad);
     }
 }

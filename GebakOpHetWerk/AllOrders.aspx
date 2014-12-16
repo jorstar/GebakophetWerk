@@ -26,6 +26,9 @@
 &nbsp;Zie facturen van:&nbsp;&nbsp;<asp:DropDownList ID="ddlFacturen" runat="server" AutoPostBack="True" Height="26px" OnSelectedIndexChanged="ddlFacturen_SelectedIndexChanged" Width="271px">
         </asp:DropDownList>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        woont:
+        <asp:Label ID="lbladres" runat="server"></asp:Label>
+&nbsp;<asp:Label ID="lblstad" runat="server"></asp:Label>
     </p>
     <p>
         <asp:GridView ID="GridView2" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None">
