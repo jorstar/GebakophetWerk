@@ -37,11 +37,11 @@ public partial class User_Controls_WebUserControl : System.Web.UI.UserControl
         {
             MenuItem home = HoofdMenu.FindItem(@"Home");
             HoofdMenu.Items.Remove(home);
-            MenuItem orders = HoofdMenu.FindItem(@"orders");
+            MenuItem orders = HoofdMenu.FindItem(@"myorders");
             HoofdMenu.Items.Remove(orders);
             MenuItem admin = HoofdMenu.FindItem(@"Admin");
             HoofdMenu.Items.Remove(admin);
-            MenuItem logout = HoofdMenu.FindItem(@"Logout");
+            MenuItem logout = HoofdMenu.FindItem(@"loguit");
             HoofdMenu.Items.Remove(logout);
             
         }
