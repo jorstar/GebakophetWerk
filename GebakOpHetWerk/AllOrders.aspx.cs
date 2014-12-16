@@ -15,11 +15,11 @@ public partial class _Default : System.Web.UI.Page
         if(! IsPostBack)
         {
             TimeSpan mintime = new TimeSpan(14, 0, 0);
-            DateTime mindate = DateTime.Now.AddDays(-2);
+            DateTime mindate = DateTime.Now.AddDays(-1);
             DateTime mindatetime = new DateTime(mindate.Year, mindate.Month, mindate.Day, mintime.Hours, mintime.Minutes, mintime.Seconds);
 
             TimeSpan maxtime = new TimeSpan(14, 0, 0);
-            DateTime maxdate = DateTime.Now.AddDays(-2);
+            DateTime maxdate = DateTime.Now.AddDays(0);
             DateTime maxdatetime = new DateTime(maxdate.Year, maxdate.Month, maxdate.Day, maxtime.Hours, maxtime.Minutes, maxtime.Seconds);
 
         var bestellingen = (from o in ef.Orders
@@ -54,11 +54,11 @@ public partial class _Default : System.Web.UI.Page
     protected void ddlFacturen_SelectedIndexChanged(object sender, EventArgs e)
     {
         TimeSpan mintime = new TimeSpan(14, 0, 0);
-        DateTime mindate = DateTime.Now.AddDays(-2);
+        DateTime mindate = DateTime.Now.AddDays(-1);
         DateTime mindatetime = new DateTime(mindate.Year, mindate.Month, mindate.Day, mintime.Hours, mintime.Minutes, mintime.Seconds);
 
         TimeSpan maxtime = new TimeSpan(14, 0, 0);
-        DateTime maxdate = DateTime.Now.AddDays(-2);
+        DateTime maxdate = DateTime.Now.AddDays(0);
         DateTime maxdatetime = new DateTime(maxdate.Year, maxdate.Month, maxdate.Day, maxtime.Hours, maxtime.Minutes, maxtime.Seconds);
 
         int sel = Convert.ToInt32(ddlFacturen.SelectedValue);

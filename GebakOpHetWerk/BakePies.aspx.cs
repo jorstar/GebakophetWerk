@@ -14,17 +14,18 @@ public partial class _Default : System.Web.UI.Page
         GebakophetWerkEntities ef = new GebakophetWerkEntities();
 
         TimeSpan mintime = new TimeSpan(14, 0, 0);
-        DateTime mindate = DateTime.Now.AddDays(-2);
+        DateTime mindate = DateTime.Now.AddDays(-1);
         DateTime mindatetime = new DateTime(mindate.Year, mindate.Month, mindate.Day, mintime.Hours, mintime.Minutes, mintime.Seconds);
 
         TimeSpan maxtime = new TimeSpan(14, 0, 0);
-        DateTime maxdate = DateTime.Now.AddDays(-2);
+        DateTime maxdate = DateTime.Now.AddDays(0);
         DateTime maxdatetime = new DateTime(maxdate.Year, maxdate.Month, maxdate.Day, maxtime.Hours, maxtime.Minutes, maxtime.Seconds);
 
         var taarten = (from o in ef.OrderPies
                        where o.Order.OrderDate < maxdatetime && o.Order.OrderDate >= mindatetime && o.Order.OrderDate != null
                        group o by new { o.Pie.Name , o.Number } into op
-                       select new { op.Key.Name, op.Key.Number }).ToList();
+                       select new { op.Key.Name, op.Key.Number,aantal = ef.OrderPies.ToList().Select(M => M.Number).Sum() }).ToList();
+
         GridView1.DataSource = taarten;
         GridView1.DataBind();
     }
