@@ -102,10 +102,10 @@ public partial class _Default : System.Web.UI.Page
                 objOrderItem.OrderID = objOrder.ID;
                 objOrderItem.AmountPrice = CalculateTotalAmount();
                 objOrderItem.Number = Convert.ToInt32(tbAantal.Text);
+                GebakophetWerkEntities gb = new GebakophetWerkEntities();
+                gb.OrderPies.Add(objOrderItem);
 
-                ef.OrderPies.Add(objOrderItem);
-
-                ef.SaveChanges();
+                gb.SaveChanges();
             }
         }
     }
