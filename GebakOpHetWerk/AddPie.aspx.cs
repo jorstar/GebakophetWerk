@@ -59,10 +59,6 @@ public partial class _Default : System.Web.UI.Page
             gb.Pies.Add(taart);
             gb.SaveChanges();
         }
-        catch(LinqDataSourceValidationException ex)
-        {
-            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
-        }
         catch(DuplicateNameException ex)
         {
             ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
