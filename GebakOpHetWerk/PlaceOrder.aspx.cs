@@ -26,7 +26,7 @@ public partial class _Default : System.Web.UI.Page
             ef.Orders.Add(new Order
             {
                 ID = Convert.ToInt32(Session["User"]),
-                OrderDate = DateTime.Today,
+                OrderDate = DateTime.Now,
                 User = objGebruiker
             });
             ef.SaveChanges();
