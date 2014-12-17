@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" Runat="Server">
+    Voor 16:00 besteld morgen in huis.
     <asp:ListView ID="ListView1" runat="server" DataSourceID="allpiesDS" DataKeyNames="ID">
        <AlternatingItemTemplate>
             <div class="pielistalter">

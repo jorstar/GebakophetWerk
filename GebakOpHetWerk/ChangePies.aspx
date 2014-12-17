@@ -47,7 +47,7 @@
             <td>
                 <asp:Button ID="btnAanpassen" runat="server" OnClick="btnAanpassen_Click" Text="aanpassen" />
 &nbsp;
-                <asp:Button ID="btnCancel" runat="server" OnClick="btnCancel_Click" Text="cancel" />
+                <asp:Button ID="btnCancel" runat="server" OnClick="btnCancel_Click" Text="Annuleren" />
 &nbsp;
                 <asp:Button ID="btnSave" runat="server" Text="Opslaan" OnClick="btnSave_Click" />
             </td>

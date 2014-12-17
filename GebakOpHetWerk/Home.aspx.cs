@@ -41,9 +41,6 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void btnedit_Click(object sender, EventArgs e)
     {
-        tbvoornaam.ReadOnly = false;
-        tbachternaam.ReadOnly = false;
-        tbTussenvoegsel.ReadOnly = false;
         tbadres.ReadOnly = false;
         tbplaats.ReadOnly = false;
         tbpostcode.ReadOnly = false;
@@ -55,9 +52,6 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void btncancel_Click(object sender, EventArgs e)
     {
-        tbvoornaam.ReadOnly = true;
-        tbachternaam.ReadOnly = true;
-        tbTussenvoegsel.ReadOnly = true;
         tbadres.ReadOnly = true;
         tbplaats.ReadOnly = true;
         tbpostcode.ReadOnly = true;
@@ -81,9 +75,6 @@ public partial class _Default : System.Web.UI.Page
                                select u);
 
                 User user = (User)curuser.Single();
-                user.Firstname = tbvoornaam.Text;
-                user.Lastname = tbachternaam.Text;
-                user.Middlename = tbTussenvoegsel.Text;
                 user.Adress = tbadres.Text;
                 user.City = tbplaats.Text;
                 user.Zipcode = tbpostcode.Text;

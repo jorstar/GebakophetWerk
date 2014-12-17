@@ -121,6 +121,9 @@ public partial class _Default : System.Web.UI.Page
             btnAanpassen.Enabled = true;
             btnCancel.Enabled = false;
             ddlTaarten.Enabled = true;
+
+            Session["verandering"] = "Taart is aangepast.";
+            Response.Redirect("Gelukt.aspx");
         }
         catch (DuplicateNameException ex)
         {

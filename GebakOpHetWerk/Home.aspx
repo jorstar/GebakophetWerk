@@ -7,12 +7,12 @@
     <asp:UpdatePanel ID="UpdatePanel1" runat="server"><ContentTemplate>
     <table style="width: 100%;">
         <tr>
-            <td>Voornaam:<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Voornaam is verplicht." Text="*" ControlToValidate="tbvoornaam" /></td>
+            <td>Voornaam:</td>
             <td>
                 <asp:TextBox ID="tbvoornaam" ReadOnly="true" runat="server"></asp:TextBox></td>
         </tr>
         <tr>
-            <td>Achternaam:<asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Voornaam is verplicht." Text="*" ControlToValidate="tbachternaam" /></td>
+            <td>Achternaam:</td>
             <td><asp:TextBox ID="tbachternaam" ReadOnly="true" runat="server"></asp:TextBox></td>
         </tr>
         <tr>
