@@ -21,7 +21,7 @@ public partial class User_Controls_Login : System.Web.UI.UserControl
 
 
            var Gebruiker = from u in ef.Users
-                            where u.Username == user && u.Password == pass
+                            where u.Username == user && u.Password == pass && u.Activated == true
                             select u;
 
            if (Gebruiker.Any())
