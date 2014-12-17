@@ -10,7 +10,14 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Session["user"] != null)
+        {
+            Response.Redirect("Home.aspx");            
+        }
+        else
+        {
+            
+        }
     }
     GebakophetWerkEntities ef = new GebakophetWerkEntities();
     protected void btnRegister_Click(object sender, EventArgs e)

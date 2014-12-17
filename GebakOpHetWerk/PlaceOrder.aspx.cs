@@ -12,46 +12,62 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
-        GebakophetWerkEntities ef = new GebakophetWerkEntities();
-
-        if (Session["currentOrderID"] == null)
+        if (Session["user"] != null)
         {
-            int usrString = Convert.ToInt32(Session["User"]);
-            var user = from u in ef.Users
-                       where u.ID == usrString
-                       select u;
-            User objGebruiker = (User)user.First();
-
-            ef.Orders.Add(new Order
+            if (Convert.ToBoolean(Session["Role"]))
             {
-                ID = Convert.ToInt32(Session["User"]),
-                OrderDate = DateTime.Now,
-                User = objGebruiker
-            });
-            ef.SaveChanges();
-
-            if (ef.GetOrderIdList((int)Session["User"]) != null)
-            {
-                Session["currentOrderID"] = ef.GetOrderIdList((int)Session["User"]).First();
+                Response.Redirect("Home.aspx");
             }
             else
             {
-                //redirect naar de homepage
-                Response.Redirect("Home.aspx");
+
+
+
+                GebakophetWerkEntities ef = new GebakophetWerkEntities();
+
+                if (Session["currentOrderID"] == null)
+                {
+                    int usrString = Convert.ToInt32(Session["User"]);
+                    var user = from u in ef.Users
+                               where u.ID == usrString
+                               select u;
+                    User objGebruiker = (User)user.First();
+
+                    ef.Orders.Add(new Order
+                    {
+                        ID = Convert.ToInt32(Session["User"]),
+                        OrderDate = DateTime.Now,
+                        User = objGebruiker
+                    });
+                    ef.SaveChanges();
+
+                    if (ef.GetOrderIdList((int)Session["User"]) != null)
+                    {
+                        Session["currentOrderID"] = ef.GetOrderIdList((int)Session["User"]).First();
+                    }
+                    else
+                    {
+                        //redirect naar de homepage
+                        Response.Redirect("Home.aspx");
+                    }
+
+
+
+                }
+
+                if (!IsPostBack)
+                {
+                    ddlTaarten.DataSource = ef.GetTaartenList();
+                    ddlTaarten.DataTextField = "Name";
+                    ddlTaarten.DataValueField = "ID";
+                    ddlTaarten.DataBind();
+                    ddlTaarten.SelectedIndex = 0;
+                }
             }
-
-
-
         }
-
-        if (!IsPostBack)
+        else
         {
-            ddlTaarten.DataSource = ef.GetTaartenList();
-            ddlTaarten.DataTextField = "Name";
-            ddlTaarten.DataValueField = "ID";
-            ddlTaarten.DataBind();
-            ddlTaarten.SelectedIndex = 0;
+            Response.Redirect("Login.aspx");
         }
     }
 

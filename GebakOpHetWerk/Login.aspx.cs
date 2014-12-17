@@ -9,6 +9,20 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Session["user"] != null)
+        {
+            if (Convert.ToBoolean(Session["Role"]))
+            {
+                Response.Redirect("Home.aspx");
+            }
+            else
+            {
+                Response.Redirect("Home.aspx");
+            }
+        }
+        else
+        {
+            
+        }
     }
 }

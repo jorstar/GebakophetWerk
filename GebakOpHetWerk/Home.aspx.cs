@@ -12,7 +12,15 @@ public partial class _Default : System.Web.UI.Page
     GebakophetWerkEntities ef = new GebakophetWerkEntities();
     protected void Page_Load(object sender, EventArgs e)
     {
-        getuser();
+        if (Session["user"] != null)
+        {
+            getuser();
+        }
+        else
+        {
+            Response.Redirect("Login.aspx");
+        }
+        
     }
 
     private void getuser()

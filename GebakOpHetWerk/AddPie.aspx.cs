@@ -11,7 +11,21 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Session["user"] != null)
+        {
+            if (Convert.ToBoolean(Session["Role"]))
+            {
+                
+            }
+            else
+            {
+                Response.Redirect("Home.aspx");
+            }
+        }
+        else
+        {
+            Response.Redirect("Login.aspx");
+        }
     }
     protected void btnSave_Click(object sender, EventArgs e)
     {

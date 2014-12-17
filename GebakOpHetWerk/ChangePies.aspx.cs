@@ -13,37 +13,50 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
-        if(! IsPostBack)
+        if (Session["user"] != null)
         {
-            var PieInfo = (from u in ef.Pies
-                           where u.Activated == true
-                           select u);
-            Pie taart = (Pie)PieInfo.First();
+            if (Convert.ToBoolean(Session["Role"]))
+            {
+                if (!IsPostBack)
+                {
+                    var PieInfo = (from u in ef.Pies
+                                   where u.Activated == true
+                                   select u);
+                    Pie taart = (Pie)PieInfo.First();
 
-            tbPiename.Text = taart.Name;
-            tbPrice.Text = Convert.ToString(taart.Price);
-            tbDescription.Text = taart.Description;
-            tbAfbeelding.Text = taart.Picture;
-            tbDescription.ReadOnly = true;
-            btnSave.Enabled = false;
+                    tbPiename.Text = taart.Name;
+                    tbPrice.Text = Convert.ToString(taart.Price);
+                    tbDescription.Text = taart.Description;
+                    tbAfbeelding.Text = taart.Picture;
+                    tbDescription.ReadOnly = true;
+                    btnSave.Enabled = false;
 
-            tbPiename.ReadOnly = true;
-            tbPrice.ReadOnly = true;
-            tbAfbeelding.ReadOnly = true;
-            fuPicture.Enabled = false;
-            fuPicture.Visible = false;
-            btnCancel.Enabled = false;
+                    tbPiename.ReadOnly = true;
+                    tbPrice.ReadOnly = true;
+                    tbAfbeelding.ReadOnly = true;
+                    fuPicture.Enabled = false;
+                    fuPicture.Visible = false;
+                    btnCancel.Enabled = false;
 
-            var taarten = (from u in ef.Pies
-                        where u.Activated == true
-                        select new {ID = u.ID, Naam = u.Name }).ToList();
+                    var taarten = (from u in ef.Pies
+                                   where u.Activated == true
+                                   select new { ID = u.ID, Naam = u.Name }).ToList();
 
-            ddlTaarten.DataSource = taarten;
-            ddlTaarten.DataTextField = "Naam";
-            ddlTaarten.DataValueField = "ID";
-            ddlTaarten.DataBind();
+                    ddlTaarten.DataSource = taarten;
+                    ddlTaarten.DataTextField = "Naam";
+                    ddlTaarten.DataValueField = "ID";
+                    ddlTaarten.DataBind();
 
+                }
+            }
+            else
+            {
+                Response.Redirect("Home.aspx");
+            }
+        }
+        else
+        {
+            Response.Redirect("Login.aspx");
         }
     }
     protected void btnSave_Click(object sender, EventArgs e)

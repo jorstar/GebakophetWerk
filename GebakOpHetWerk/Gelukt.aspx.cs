@@ -14,6 +14,10 @@ public partial class _Default : System.Web.UI.Page
             verandering.Text = Session["verandering"].ToString();
             Session["verandering"] = null;
         }
+        else
+        {
+            Response.Redirect("AllCakes.aspx");
+        }
         
     }
 }
