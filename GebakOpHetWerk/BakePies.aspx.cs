@@ -24,7 +24,7 @@ public partial class _Default : System.Web.UI.Page
         var taarten = (from o in ef.OrderPies
                        where o.Order.OrderDate < maxdatetime && o.Order.OrderDate >= mindatetime && o.Order.OrderDate != null
                        group o by new { o.Pie.Name , o.Number } into op
-                       select new { op.Key.Name, op.Key.Number,aantal = ef.OrderPies.ToList().Select(M => M.Number).Sum() }).ToList();
+                       select new { op.Key.Name, op.Key.Number}).ToList();
 
         GridView1.DataSource = taarten;
         GridView1.DataBind();
