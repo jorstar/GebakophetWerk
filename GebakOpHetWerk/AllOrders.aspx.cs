@@ -49,6 +49,16 @@ public partial class _Default : System.Web.UI.Page
         GridView2.DataSource = facturen;
         GridView2.DataBind();
 
+        var adres = (from st in ef.Users
+                     where st.ID == sel
+                     select st.Adress).FirstOrDefault();
+        lbladres.Text = Convert.ToString(adres);
+
+        var stad = (from st in ef.Users
+                    where st.ID == sel
+                    select st.City).FirstOrDefault();
+        lblstad.Text = Convert.ToString(stad);
+
         }
     }
     protected void ddlFacturen_SelectedIndexChanged(object sender, EventArgs e)
@@ -73,14 +83,14 @@ public partial class _Default : System.Web.UI.Page
         GridView2.DataBind();
 
 
-        //var adres = (from st in ef.Users
-        //             where st.ID == sel
-        //             select st.Adress);
-        //lbladres.Text = Convert.ToString(adres);
+        var adres = (from st in ef.Users
+                     where st.ID == sel
+                     select st.Adress).FirstOrDefault();
+        lbladres.Text = Convert.ToString(adres);
 
-        //var stad = (from st in ef.Users
-        //             where st.ID == sel
-        //             select st.City);
-        //lblstad.Text = Convert.ToString(stad);
+        var stad = (from st in ef.Users
+                    where st.ID == sel
+                    select st.City).FirstOrDefault();
+        lblstad.Text = Convert.ToString(stad);
     }
 }
