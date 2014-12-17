@@ -14,7 +14,10 @@ public partial class _Default : System.Web.UI.Page
     {
         if (Session["user"] != null)
         {
+            if(!IsPostBack)
+            {
             getuser();
+            }
         }
         else
         {
@@ -49,6 +52,7 @@ public partial class _Default : System.Web.UI.Page
         btnedit.Enabled = false;
         btnSave.Enabled = true;
         btncancel.Enabled = true;
+        getuser();
     }
     protected void btncancel_Click(object sender, EventArgs e)
     {

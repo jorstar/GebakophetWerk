@@ -17,15 +17,12 @@
     </p>
     <table style="width: 100%;">
         <tr>
-            <td>Taart naam:<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="tbPiename" ErrorMessage="Taartnaam moet ingevult worden." ForeColor="Red" ValidationGroup="1">*</asp:RequiredFieldValidator>
-            </td>
+            <td>Taart naam:</td>
             <td>
                 <asp:TextBox ID="tbPiename" runat="server" /></td>
         </tr>
         <tr>
-            <td>Taart Prijs:<asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="tbPrice" ErrorMessage="Prijs moet ingevult worden." ForeColor="Red" ValidationGroup="1">*</asp:RequiredFieldValidator>
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="tbPrice" ErrorMessage="De prijs moet een nummer zijn." ForeColor="Red" ValidationGroup="1">*</asp:RegularExpressionValidator>
-            </td>
+            <td>Taart Prijs:</td>
             <td><asp:TextBox ID="tbPrice" runat="server" /></td>
         </tr>
         <tr>
@@ -36,14 +33,12 @@
             </td>
         </tr>
         <tr>
-            <td>Omschrijving:<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="tbDescription" ErrorMessage="Vul een omschrijving in." ForeColor="Red" ValidationGroup="1">*</asp:RequiredFieldValidator>
-            </td>
+            <td>Omschrijving:</td>
             <td><asp:TextBox ID="tbDescription" runat="server" Rows="5" TextMode="MultiLine" /></td>
         </tr>
         <tr>
             <td>
-                <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="1" />
-            </td>
+                &nbsp;</td>
             <td>
                 <asp:Button ID="btnAanpassen" runat="server" OnClick="btnAanpassen_Click" Text="aanpassen" />
 &nbsp;

@@ -33,8 +33,10 @@ public partial class _Default : System.Web.UI.Page
                     GridView1.DataSource = bestellingen;
                     GridView1.DataBind();
 
+                    int uid = (int)Session["User"];
+
                     var ddlinhoud = (from ge in ef.Users
-                                     where ge.Activated == true
+                                     where ge.Activated == true && ge.ID != uid
                                      select new { ID = ge.ID, Name = ge.Firstname + " " + ge.Middlename + " " + ge.Lastname }).ToList();
 
                     ddlFacturen.DataSource = ddlinhoud;

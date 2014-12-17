@@ -67,7 +67,7 @@ public partial class _Default : System.Web.UI.Page
 
             int TaId = Convert.ToInt32(ddlTaarten.SelectedValue);
 
-            var PieInfo = (from u in ef.Pies
+            var PieInfo = (from u in gb.Pies
                            where u.Activated == true && u.ID == TaId
                            select u);
             Pie taart = (Pie)PieInfo.First();
@@ -104,6 +104,7 @@ public partial class _Default : System.Web.UI.Page
             taart.Price = Convert.ToDecimal(tbPrice.Text);
             taart.Description = tbDescription.Text;
 
+            
             gb.SaveChanges();
 
 

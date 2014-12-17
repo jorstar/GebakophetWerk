@@ -10,6 +10,10 @@
     -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
     -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    
+}
+#nav ul a {
+    color:black;
 }
 
 #nav ul li {
@@ -49,6 +53,9 @@
    -ms-transition: opacity 0.2s;
    -o-transition: opacity 0.2s;
    -transition: opacity 0.2s;
+}
+#nav ul li ul a {
+    color:white;
 }
 
 #nav ul li ul li {
