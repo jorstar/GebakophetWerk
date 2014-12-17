@@ -9,40 +9,53 @@
         <tr>
             <td>Voornaam:</td>
             <td>
-                <asp:TextBox ID="tbvoornaam" ReadOnly="true" runat="server"></asp:TextBox></td>
+                <asp:Label ID="lblVoornaam" runat="server"></asp:Label>
+            </td>
         </tr>
         <tr>
             <td>Achternaam:</td>
-            <td><asp:TextBox ID="tbachternaam" ReadOnly="true" runat="server"></asp:TextBox></td>
+            <td>
+                <asp:Label ID="lblAchternaam" runat="server"></asp:Label>
+            </td>
         </tr>
         <tr>
             <td>Tussenvoegsels:</td>
-            <td><asp:TextBox ID="tbTussenvoegsel" ReadOnly="true" runat="server"></asp:TextBox></td>
-        </tr>
-        <tr>
-            <td>Email:<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Voornaam is verplicht." Text="*" ControlToValidate="tbemail" /></td>
-            <td><asp:TextBox ID="tbemail" ReadOnly="true" runat="server" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" TextMode="Email" EnableViewState="False"></asp:TextBox></td>
-        </tr>
-        <tr>
-            <td>Adres:<asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="Voornaam is verplicht." Text="*" ControlToValidate="tbadres" /></td>
-            <td><asp:TextBox ID="tbadres" ReadOnly="true" runat="server" EnableViewState="False"></asp:TextBox></td>
-        </tr>
-        <tr>
-            <td>plaats:<asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="Voornaam is verplicht." Text="*" ControlToValidate="tbplaats" /></td>
-            <td><asp:TextBox ID="tbplaats" ReadOnly="true" runat="server" EnableViewState="False"></asp:TextBox></td>
-        </tr>
-        <tr>
-            <td>Postcode:<asp:RequiredFieldValidator ID="RequiredFieldValidator6" pattern="^[1-9][0-9]{3}\s?[a-zA-Z]{2}$" runat="server" ErrorMessage="Voornaam is verplicht." Text="*" ControlToValidate="tbpostcode" /></td>
-            <td><asp:TextBox ID="tbpostcode" ReadOnly="true" runat="server" EnableViewState="False"></asp:TextBox></td>
-        </tr>
-        <tr>
-            <td>Wachtwoord:</td>
-            <td><asp:TextBox ID="tbwachtwoord" ReadOnly="true" runat="server" TextMode="Password"></asp:TextBox></td>
-        </tr>
-        <tr>
-            <td><asp:Button ID="btnSave" runat="server" Enabled="false" Text="Opslaan" OnClick="btnSave_Click" /></td>
             <td>
-                <asp:Button ID="btnedit" runat="server" Text="Aanpassen" OnClick="btnedit_Click" /><asp:Button ID="btncancel" Enabled="false" runat="server" Text="Annuleren" OnClick="btncancel_Click" /></td>
+                <asp:Label ID="lblTussen" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>
+                <asp:Label ID="lblEmail" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td>Adres:</td>
+            <td>
+                <asp:Label ID="lblAdres" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td>plaats:</td>
+            <td>
+                <asp:Label ID="lblPlaats" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td>Postcode:</td>
+            <td>
+                <asp:Label ID="lblPostcode" runat="server"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <asp:Button ID="btnedit" runat="server" Text="Aanpassen" OnClick="btnedit_Click" /></td>
         </tr>
     </table>
         </ContentTemplate></asp:UpdatePanel>

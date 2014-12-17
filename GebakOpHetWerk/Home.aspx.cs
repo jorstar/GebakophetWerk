@@ -34,94 +34,16 @@ public partial class _Default : System.Web.UI.Page
                        select u);
         User user = (User)curuser.First();
 
-        tbvoornaam.Text = user.Firstname;
-        tbachternaam.Text = user.Lastname;
-        tbTussenvoegsel.Text = user.Middlename;
-        tbadres.Text = user.Adress;
-        tbplaats.Text = user.City;
-        tbpostcode.Text = user.Zipcode;
-        tbemail.Text = user.Email;
+        lblVoornaam.Text = user.Firstname;
+        lblAchternaam.Text = user.Lastname;
+        lblTussen.Text = user.Middlename;
+        lblAdres.Text = user.Adress;
+        lblPlaats.Text = user.City;
+        lblPostcode.Text = user.Zipcode;
+        lblEmail.Text = user.Email;
     }
     protected void btnedit_Click(object sender, EventArgs e)
     {
-        tbadres.ReadOnly = false;
-        tbplaats.ReadOnly = false;
-        tbpostcode.ReadOnly = false;
-        tbemail.ReadOnly = false;
-        tbwachtwoord.ReadOnly = false;
-        btnedit.Enabled = false;
-        btnSave.Enabled = true;
-        btncancel.Enabled = true;
-        getuser();
-    }
-    protected void btncancel_Click(object sender, EventArgs e)
-    {
-        tbadres.ReadOnly = true;
-        tbplaats.ReadOnly = true;
-        tbpostcode.ReadOnly = true;
-        tbemail.ReadOnly = true;
-        tbwachtwoord.ReadOnly = true;
-        btnedit.Enabled = true;
-        btnSave.Enabled = false;
-        btncancel.Enabled = false;
-        tbwachtwoord.Text = "";
-        getuser();
-    }
-    protected void btnSave_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            if (Page.IsValid)
-            {
-                int uid = (int)Session["User"];
-                var curuser = (from u in ef.Users
-                               where u.ID == uid
-                               select u);
-
-                User user = (User)curuser.Single();
-                user.Adress = tbadres.Text;
-                user.City = tbplaats.Text;
-                user.Zipcode = tbpostcode.Text;
-                user.Email = tbemail.Text;
-                if (tbwachtwoord.Text != "")
-                {
-                    user.Password = CalculateHashedPassword(tbwachtwoord.Text, user.Username);
-                }
-
-                ef.SaveChanges();
-
-                Session["verandering"] = "Account is aangepast.";
-                Response.Redirect("Gelukt.aspx");
-            }
-        }
-        catch (DuplicateNameException ex)
-        {
-            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
-        }
-        catch (ArgumentNullException ex)
-        {
-            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
-        }
-        catch (FormatException ex)
-        {
-            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
-        }
-        catch (EntityException ex)
-        {
-            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
-        }
-        catch (Exception ex)
-        {
-            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
-        }
-    }
-    private static string CalculateHashedPassword(string clearpwd, string loginnaam)
-    {
-        using (var sha = System.Security.Cryptography.SHA256.Create())
-        {
-            var computedHash = sha.ComputeHash(System.Text.Encoding.Unicode.GetBytes(clearpwd + loginnaam.ToUpper()));
-
-            return Convert.ToBase64String(computedHash);
-        }
+        Response.Redirect("ChangeUser.aspx");
     }
 }
