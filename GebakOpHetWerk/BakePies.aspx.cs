@@ -11,38 +11,61 @@ public partial class _Default : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["user"] != null)
+        try
         {
-            if (Convert.ToBoolean(Session["Role"]))
+            if (Session["user"] != null)
             {
+                if (Convert.ToBoolean(Session["Role"]))
+                {
 
 
-                GebakophetWerkEntities ef = new GebakophetWerkEntities();
+                    GebakophetWerkEntities ef = new GebakophetWerkEntities();
 
-                TimeSpan mintime = new TimeSpan(14, 0, 0);
-                DateTime mindate = DateTime.Now.AddDays(-1);
-                DateTime mindatetime = new DateTime(mindate.Year, mindate.Month, mindate.Day, mintime.Hours, mintime.Minutes, mintime.Seconds);
+                    TimeSpan mintime = new TimeSpan(14, 0, 0);
+                    DateTime mindate = DateTime.Now.AddDays(-1);
+                    DateTime mindatetime = new DateTime(mindate.Year, mindate.Month, mindate.Day, mintime.Hours, mintime.Minutes, mintime.Seconds);
 
-                TimeSpan maxtime = new TimeSpan(14, 0, 0);
-                DateTime maxdate = DateTime.Now.AddDays(0);
-                DateTime maxdatetime = new DateTime(maxdate.Year, maxdate.Month, maxdate.Day, maxtime.Hours, maxtime.Minutes, maxtime.Seconds);
+                    TimeSpan maxtime = new TimeSpan(14, 0, 0);
+                    DateTime maxdate = DateTime.Now.AddDays(0);
+                    DateTime maxdatetime = new DateTime(maxdate.Year, maxdate.Month, maxdate.Day, maxtime.Hours, maxtime.Minutes, maxtime.Seconds);
 
-                var taarten = (from o in ef.OrderPies
-                               where o.Order.OrderDate < maxdatetime && o.Order.OrderDate >= mindatetime && o.Order.OrderDate != null
-                               group o by o.Pie.Name into op
-                               select new { op.Key, aantal =  op.Sum(o => o.Number) }).ToList();
+                    var taarten = (from o in ef.OrderPies
+                                   where o.Order.OrderDate < maxdatetime && o.Order.OrderDate >= mindatetime && o.Order.OrderDate != null
+                                   group o by o.Pie.Name into op
+                                   select new { op.Key, aantal = op.Sum(o => o.Number) }).ToList();
 
-                GridView1.DataSource = taarten;
-                GridView1.DataBind();
+                    GridView1.DataSource = taarten;
+                    GridView1.DataBind();
+                }
+                else
+                {
+                    Response.Redirect("Home.aspx");
+                }
             }
             else
             {
-                Response.Redirect("Home.aspx");
+                Response.Redirect("Login.aspx");
             }
         }
-        else
+        catch (DuplicateNameException ex)
         {
-            Response.Redirect("Login.aspx");
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+        }
+        catch (ArgumentNullException ex)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+        }
+        catch (FormatException ex)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+        }
+        catch (EntityException ex)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+        }
+        catch (Exception ex)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
         }
     }
 }

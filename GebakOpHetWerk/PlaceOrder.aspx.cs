@@ -12,117 +12,146 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Session["user"] != null)
+        try
         {
-            if (Convert.ToBoolean(Session["Role"]))
+            if (Session["user"] != null)
             {
-                Response.Redirect("Home.aspx");
+                if (Convert.ToBoolean(Session["Role"]))
+                {
+                    Response.Redirect("Home.aspx");
+                }
+                else
+                {
+
+
+
+                    GebakophetWerkEntities ef = new GebakophetWerkEntities();
+
+                    if (Session["currentOrderID"] == null)
+                    {
+                        int usrString = Convert.ToInt32(Session["User"]);
+                        var user = from u in ef.Users
+                                   where u.ID == usrString
+                                   select u;
+                        User objGebruiker = (User)user.First();
+
+                        ef.Orders.Add(new Order
+                        {
+                            ID = Convert.ToInt32(Session["User"]),
+                            OrderDate = DateTime.Now,
+                            User = objGebruiker
+                        });
+                        ef.SaveChanges();
+
+                        if (ef.GetOrderIdList((int)Session["User"]) != null)
+                        {
+                            Session["currentOrderID"] = ef.GetOrderIdList((int)Session["User"]).First();
+                        }
+                        else
+                        {
+                            //redirect naar de homepage
+                            Response.Redirect("Home.aspx");
+                        }
+
+
+
+                    }
+
+                    if (!IsPostBack)
+                    {
+                        ddlTaarten.DataSource = ef.GetTaartenList();
+                        ddlTaarten.DataTextField = "Name";
+                        ddlTaarten.DataValueField = "ID";
+                        ddlTaarten.DataBind();
+                        ddlTaarten.SelectedIndex = 0;
+                    }
+                }
             }
             else
             {
-
-
-
-                GebakophetWerkEntities ef = new GebakophetWerkEntities();
-
-                if (Session["currentOrderID"] == null)
-                {
-                    int usrString = Convert.ToInt32(Session["User"]);
-                    var user = from u in ef.Users
-                               where u.ID == usrString
-                               select u;
-                    User objGebruiker = (User)user.First();
-
-                    ef.Orders.Add(new Order
-                    {
-                        ID = Convert.ToInt32(Session["User"]),
-                        OrderDate = DateTime.Now,
-                        User = objGebruiker
-                    });
-                    ef.SaveChanges();
-
-                    if (ef.GetOrderIdList((int)Session["User"]) != null)
-                    {
-                        Session["currentOrderID"] = ef.GetOrderIdList((int)Session["User"]).First();
-                    }
-                    else
-                    {
-                        //redirect naar de homepage
-                        Response.Redirect("Home.aspx");
-                    }
-
-
-
-                }
-
-                if (!IsPostBack)
-                {
-                    ddlTaarten.DataSource = ef.GetTaartenList();
-                    ddlTaarten.DataTextField = "Name";
-                    ddlTaarten.DataValueField = "ID";
-                    ddlTaarten.DataBind();
-                    ddlTaarten.SelectedIndex = 0;
-                }
+                Response.Redirect("Login.aspx");
             }
         }
-        else
+        catch (ArgumentNullException ex)
         {
-            Response.Redirect("Login.aspx");
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+        }
+        catch (FormatException ex)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+        }
+        catch (Exception ex)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
         }
     }
 
     public Decimal CalculateTotalAmount()
     {
-        if (ef.GetCakePrice(Convert.ToInt32(ddlTaarten.SelectedValue)) != null && tbAantal.Text != "" && tbAantal.Text != "0")
-        {
+            if (ef.GetCakePrice(Convert.ToInt32(ddlTaarten.SelectedValue)) != null && tbAantal.Text != "" && tbAantal.Text != "0")
+            {
 
-            decimal objDecimel = Convert.ToDecimal(ef.GetCakePrice(Convert.ToInt32(ddlTaarten.SelectedValue)).First());
+                decimal objDecimel = Convert.ToDecimal(ef.GetCakePrice(Convert.ToInt32(ddlTaarten.SelectedValue)).First());
 
-            int objInt = Convert.ToInt32(tbAantal.Text);
+                int objInt = Convert.ToInt32(tbAantal.Text);
 
-            Decimal totalPrice = (objDecimel * objInt);
+                Decimal totalPrice = (objDecimel * objInt);
 
-            return totalPrice;
+                return totalPrice;
 
-        }
-        else
-            return 0;
+            }
+            else
+                return 0;
     }
 
     protected void btnToevoegen_Click(object sender, EventArgs e)
     {
-
-        if (Page.IsValid)
+        try
         {
-            if (Session["currentOrderID"] != null)
+            if (Page.IsValid)
             {
+                if (Session["currentOrderID"] != null)
+                {
 
 
-                int userID = Convert.ToInt32(Session["User"]);
+                    int userID = Convert.ToInt32(Session["User"]);
 
-                var oID = from O in ef.Orders
-                          where O.UserID == userID
-                          orderby O.ID descending
-                          select O;
-                Order objOrder = oID.First();
+                    var oID = from O in ef.Orders
+                              where O.UserID == userID
+                              orderby O.ID descending
+                              select O;
+                    Order objOrder = oID.First();
 
-                int taartID = Convert.ToInt32(ddlTaarten.SelectedValue);
-                var idTaart = from T in ef.Pies
-                              where T.ID == taartID
-                              select T;
-                Pie objTaart = idTaart.First();
+                    int taartID = Convert.ToInt32(ddlTaarten.SelectedValue);
+                    var idTaart = from T in ef.Pies
+                                  where T.ID == taartID
+                                  select T;
+                    Pie objTaart = idTaart.First();
 
-                OrderPie objOrderItem = new OrderPie();
+                    OrderPie objOrderItem = new OrderPie();
 
-                objOrderItem.PieID = Convert.ToInt32(ddlTaarten.SelectedValue);
-                objOrderItem.OrderID = objOrder.ID;
-                objOrderItem.AmountPrice = CalculateTotalAmount();
-                objOrderItem.Number = Convert.ToInt32(tbAantal.Text);
-                GebakophetWerkEntities gb = new GebakophetWerkEntities();
-                gb.OrderPies.Add(objOrderItem);
+                    objOrderItem.PieID = Convert.ToInt32(ddlTaarten.SelectedValue);
+                    objOrderItem.OrderID = objOrder.ID;
+                    objOrderItem.AmountPrice = CalculateTotalAmount();
+                    objOrderItem.Number = Convert.ToInt32(tbAantal.Text);
+                    GebakophetWerkEntities gb = new GebakophetWerkEntities();
+                    gb.OrderPies.Add(objOrderItem);
 
-                gb.SaveChanges();
+                    gb.SaveChanges();
+                }
             }
+        }
+        catch (ArgumentNullException ex)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+        }
+        catch (FormatException ex)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
+        }
+        catch (Exception ex)
+        {
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + ex.Message + "');", true);
         }
     }
     protected void ddlTaarten_SelectedIndexChanged(object sender, EventArgs e)
