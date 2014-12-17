@@ -14,7 +14,7 @@
     <br />
     <br />
     Aantal:&nbsp;
-    <asp:TextBox ID="tbAantal" runat="server" Width="34px" OnTextChanged="tbAantal_TextChanged"></asp:TextBox>
+    <asp:TextBox ID="tbAantal" runat="server" Width="34px" min="0" OnTextChanged="tbAantal_TextChanged" TextMode="Number"></asp:TextBox>
             <asp:Label ID="lblTotalAmount" runat="server"></asp:Label>
     <br />
     <br />

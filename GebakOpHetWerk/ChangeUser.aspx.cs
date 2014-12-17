@@ -16,7 +16,6 @@ public partial class _Default : System.Web.UI.Page
             if (!IsPostBack)
             {
                 getuser();
-                Session["changeuser"] = null;
             }
         }
         else
@@ -48,6 +47,7 @@ public partial class _Default : System.Web.UI.Page
                 ef.SaveChanges();
 
                 Session["verandering"] = "Account is aangepast.";
+                Session["changeuser"] = null;
                 Response.Redirect("Gelukt.aspx");
             }
         }
@@ -96,6 +96,7 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void btncancel_Click(object sender, EventArgs e)
     {
+        Session["changeuser"] = null;
         Response.Redirect("Home.aspx");
     }
 }
