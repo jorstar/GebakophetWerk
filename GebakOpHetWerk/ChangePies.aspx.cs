@@ -67,6 +67,7 @@ public partial class _Default : System.Web.UI.Page
                     {
                         if (fuPicture.PostedFile.ContentLength < 102400)
                         {
+                            // weghalen al bestaand plaatje
                             string filename = Path.GetFileName(fuPicture.FileName);
                             fuPicture.SaveAs(Server.MapPath("~/Images/Cakes/") + filename);
                             taart.Picture = "~/Images/Cakes/" + filename;
@@ -90,7 +91,6 @@ public partial class _Default : System.Web.UI.Page
             taart.Price = Convert.ToDecimal(tbPrice.Text);
             taart.Description = tbDescription.Text;
 
-            gb.Pies.Add(taart);
             gb.SaveChanges();
 
 
