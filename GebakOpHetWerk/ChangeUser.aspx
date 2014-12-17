@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Content" Runat="Server">
-    <table style="width: 100%;">
+    <table>
         <tr>
             <td>Email:<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Voornaam is verplicht." Text="*" ControlToValidate="tbemail" /></td>
             <td><asp:TextBox ID="tbemail" runat="server" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" TextMode="Email" EnableViewState="False"></asp:TextBox></td>
