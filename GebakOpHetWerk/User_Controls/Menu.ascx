@@ -10,6 +10,7 @@
             <asp:MenuItem Text="Mijn Bestellingen" Value="myorders" NavigateUrl="../Myorders.aspx"></asp:MenuItem>
             <asp:MenuItem Selectable="False" Text="Administratie" Value="Admin">
                 <asp:MenuItem NavigateUrl="../AddPie.aspx" Text="Taart Toevoegen" Value="Addpie"></asp:MenuItem>
+                <asp:MenuItem NavigateUrl="../ChangePies.aspx" Text="Taart Aanpassen" Value="Taart Aanpassen"></asp:MenuItem>
                 <asp:MenuItem NavigateUrl="../AllOrders.aspx" Text="Alle Bestellingen" Value="Orders"></asp:MenuItem>
                 <asp:MenuItem NavigateUrl="../BakePies.aspx" Text="Te Bakken Taarten" Value="BakePies"></asp:MenuItem>
                 <asp:MenuItem NavigateUrl="../AllUsers.aspx" Text="Alle Gebruikers" Value="allusers"></asp:MenuItem>
